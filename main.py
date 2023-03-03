@@ -5,179 +5,225 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-driver.get('http://django-todo.org/')
+def test_login_button_in_body_exists():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-# переход к начальной странице из тела сайта
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
+    # переход к начальной странице из тела сайта
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
 
-time.sleep(3)
+    time.sleep(3)
 
-# переход к начальной странице из шапки сайта
-head_elem = driver.find_element(By.XPATH, '//nav//a[@href="/login"]')
-head_elem.click()
+    driver.close()
 
-# ввод имени пользователя user1
-username1_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username1_elem.send_keys('user1')
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+def test_login_button_in_header_exists():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    # переход к начальной странице из шапки сайта
+    head_elem = driver.find_element(By.XPATH, '//nav//a[@href="/login"]')
+    head_elem.click()
 
-# разлогинивание пользователя
-logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
-logout.click()
+    driver.close()
 
-# ввод имени пользователя user2
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
-username2_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username2_elem.send_keys('user2')
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+def test_user_login(username, password):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    # переход к странице логина
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
 
-# разлогинивание пользователя
-logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
-logout.click()
+    # ввод имени пользователя
+    username_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
+    username_elem.send_keys(username)
 
-# ввод имени пользователя user3
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
-username3_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username3_elem.send_keys('user3')
+    # ввод пароля пользователя
+    password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
+    password_elem.send_keys(password)
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+    login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
+    login_button.click()
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    # разлогинивание пользователя
+    logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
+    logout.click()
 
-# разлогинивание пользователя
-logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
-logout.click()
+    driver.close()
 
-# ввод имени пользователя user4
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
-username4_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username4_elem.send_keys('user4')
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+def test_create_task(username, password, title, assigned, screenshot):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    # ввод имени пользователя
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
 
-# разлогинивание пользователя
-logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
-logout.click()
+    username_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
+    username_elem.send_keys(username)
 
-# ввод имени пользователя staffer
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
-staffer_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-staffer_elem.send_keys('staffer')
+    # ввод пароля пользователя
+    password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
+    password_elem.send_keys(password)
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+    login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
+    login_button.click()
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    # создание задачи пользователя
+    list = driver.find_element(By.XPATH, '//main/ul[1]/li[1]/a')
+    list.click()
 
-# разлогинивание пользователя
-logout = driver.find_element(By.XPATH, '//a[@href="/logout"]')
-logout.click()
+    task = driver.find_element(By.XPATH, '//button[@id="AddTaskButton"]')
+    task.click()
 
-# ввод имени пользователя user1
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
+    task_title = driver.find_element(By.XPATH, '//input[@id="id_title"]')
+    task_title.send_keys(title)
 
-username1_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username1_elem.send_keys('user1')
+    description = driver.find_element(By.XPATH, '//textarea[@id="id_note"]')
+    description.send_keys('La-la-la')
 
-# ввод пароля пользователя
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+    date = driver.find_element(By.XPATH, '//input[@type="date"]')
+    date.send_keys('30.03.2023')
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+    assigned_to = driver.find_element(By.XPATH, f'//select[@name="assigned_to"]/option[text()="{assigned}"]')
+    assigned_to.click()
 
-# создание задачи пользователя user1 для user1
-list = driver.find_element(By.XPATH, '//main/ul/li[1]/a')
-list.click()
+    submit = driver.find_element(By.XPATH, '//input[@name="add_edit_task"]')
+    submit.click()
+    driver.save_screenshot(screenshot)
 
-task = driver.find_element(By.XPATH, '//button[@id="AddTaskButton"]')
-task.click()
+    driver.close()
 
-task_title = driver.find_element(By.XPATH, '//input[@id="id_title"]')
-task_title.send_keys('New task1_1')
+def test_create_list(username, password, title, group, screenshot):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-description = driver.find_element(By.XPATH, '//textarea[@id="id_note"]')
-description.send_keys('La-la-la')
+    # ввод имени пользователя
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
 
-date = driver.find_element(By.XPATH, '//input[@type="date"]')
-date.send_keys('30.03.2023')
+    username_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
+    username_elem.send_keys(username)
 
-assigned_to = driver.find_element(By.XPATH, '//select[@name="assigned_to"]/option[text()="Tanya Stewart (user1)"]')
-assigned_to.click()
+    # ввод пароля пользователя
+    password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
+    password_elem.send_keys(password)
 
-submit = driver.find_element(By.XPATH, '//input[@name="add_edit_task"]')
-submit.click()
-driver.save_screenshot('screen_user1_1.png')
+    login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
+    login_button.click()
 
-driver.close()
+    # создание нового списка
+    list = driver.find_element(By.XPATH, '//a[@class="btn btn-primary"]')
+    list.click()
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    list_title = driver.find_element(By.XPATH, '//input[@id="id_name"]')
+    list_title.send_keys(title)
 
-driver.get('http://django-todo.org/')
+    group_to = driver.find_element(By.XPATH, f'//select[@id="id_group"]/option[text()="{group}"]')
+    group_to.click()
 
-body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
-body_elem.click()
+    submit = driver.find_element(By.XPATH, '//button[@type="submit"]')
+    submit.click()
 
-username1_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
-username1_elem.send_keys('user1')
+    driver.save_screenshot(screenshot)
 
-password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
-password_elem.send_keys('todo')
+    driver.close()
 
-login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
-login_button.click()
+def test_task_done(username, password, screenshot):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
 
-# создание задачи пользователя user1 для user2
-list = driver.find_element(By.XPATH, '//main/ul/li[1]/a')
-list.click()
+    # ввод имени пользователя
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
 
-task = driver.find_element(By.XPATH, '//button[@id="AddTaskButton"]')
-task.click()
+    username_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
+    username_elem.send_keys(username)
 
-task_title = driver.find_element(By.XPATH, '//input[@id="id_title"]')
-task_title.send_keys('New task1_2')
+    # ввод пароля пользователя
+    password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
+    password_elem.send_keys(password)
 
-description = driver.find_element(By.XPATH, '//textarea[@id="id_note"]')
-description.send_keys('La-la-la')
+    login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
+    login_button.click()
 
-date = driver.find_element(By.XPATH, '//input[@type="date"]')
-date.send_keys('30.03.2023')
+    # выбор первого списка задач
+    list = driver.find_element(By.XPATH, '//main/ul[1]/li[1]/a')
+    list.click()
 
-assigned_to = driver.find_element(By.XPATH, '//select[@name="assigned_to"]/option[text()="Brittany Wright (user2)"]')
-assigned_to.click()
+    button_done = driver.find_element(By.XPATH, '//tr[2]//button')
+    button_done.click()
 
-submit = driver.find_element(By.XPATH, '//input[@name="add_edit_task"]')
-submit.click()
-driver.save_screenshot('screen_user1_2.png')
+    driver.save_screenshot(screenshot)
+
+    driver.close()
+
+def test_task_mark_done(username, password, screenshot):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('http://django-todo.org/')
+
+    # ввод имени пользователя
+    body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
+    body_elem.click()
+
+    username_elem = driver.find_element(By.XPATH, '//input[@name="username"]')
+    username_elem.send_keys(username)
+
+    # ввод пароля пользователя
+    password_elem = driver.find_element(By.XPATH, '//input[@name="password"]')
+    password_elem.send_keys(password)
+
+    login_button = driver.find_element(By.XPATH, '//button[@class="btn btn-primary"]')
+    login_button.click()
+
+    # выбор первого списка задач
+    list = driver.find_element(By.XPATH, '//main/ul[1]/li[1]/a')
+    list.click()
+    time.sleep(2)
+    task = driver.find_element(By.XPATH, '//a[@href="/todo/task/944187/"]')
+    task.click()
+
+    button_done_in_body = driver.find_element(By.XPATH, '//button[@class="btn btn-info btn-sm"]')
+    button_done_in_body.click()
+
+    driver.save_screenshot(screenshot)
+
+    driver.close()
+
+def main():
+    # test_login_button_in_body_exists()
+    # test_login_button_in_header_exists()
+    # test_user_login('user1', 'todo')
+    # test_user_login('user2', 'todo')
+    # test_user_login('user3', 'todo')
+    # test_user_login('user4', 'todo')
+    # test_user_login('staffer', 'todo')
+    # test_create_task('user1', 'todo', 'New task1_1', 'Tanya Stewart (user1)', 'screen_user1_1.png')
+    # test_create_task('user1', 'todo', 'New task1_2', 'Brittany Wright (user2)', 'screen_user1_2.png')
+    # test_create_task('user2', 'todo', 'New task2_1', 'Tanya Stewart (user1)', 'screen_user2_1.png')
+    # test_create_task('user2', 'todo', 'New task2_2', 'Brittany Wright (user2)', 'screen_user2_2.png')
+    # test_create_task('user1', 'todo', 'New task1_s', 'Matthew Gonzalez (staffer)', 'screen_user1_s.png')
+    # test_create_task('user2', 'todo', 'New task2_s', 'Matthew Gonzalez (staffer)', 'screen_user2_s.png')
+    # test_create_task('user3', 'todo', 'New task3_3', 'Brian Harris (user3)', 'screen_user3_3.png')
+    # test_create_task('user3', 'todo', 'New task3_4', 'Linda Tucker (user4)', 'screen_user3_4.png')
+    # test_create_task('user4', 'todo', 'New task4_3', 'Brian Harris (user3)', 'screen_user4_3.png')
+    # test_create_task('user4', 'todo', 'New task4_4', 'Linda Tucker (user4)', 'screen_user4_4.png')
+    # test_create_task('user3', 'todo', 'New task3_s', 'Matthew Gonzalez (staffer)', 'screen_user3_s.png')
+    # test_create_task('user4', 'todo', 'New task4_s', 'Matthew Gonzalez (staffer)', 'screen_user4_s.png')
+    # test_create_task('staffer', 'todo', 'New tasks_s', 'Adrienne Welch (staffer)', 'screen_users_s.png')
+    # test_create_task('staffer', 'todo', 'New tasks_3', 'Brian Harris (user3)', 'screen_users_3.png')
+    # test_create_task('staffer', 'todo', 'New tasks_4', 'Linda Tucker (user4)', 'screen_users_4.png')
+    # test_create_list('staffer', 'todo', 'Added list Scuba', 'Scuba Divers', 'screen_scuba.png')
+    # test_create_list('staffer', 'todo', 'Added list Basket', 'Basket Weavers', 'screen_basket.png')
+    # test_task_done('staffer', 'todo', 'screen_done.png')
+    test_task_mark_done('staffer', 'todo', 'screen_mark_done.png')
+if __name__ == '__main__':
+    main()
+
 
 # driver.close()
