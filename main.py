@@ -5,6 +5,9 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+from test_create_task import test_create_task
+from test_user_login import test_login_button_in_body_exists, test_login_button_in_header_exists, test_user_login
+
 
 def test_create_list(username, password, title, group, screenshot):
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -107,31 +110,31 @@ def test_task_mark_done(username, password, screenshot):
 
 
 def main():
-    # test_login_button_in_body_exists()
-    # test_login_button_in_header_exists()
-    # test_user_login('user1', 'todo')
-    # test_user_login('user2', 'todo')
-    # test_user_login('user3', 'todo')
-    # test_user_login('user4', 'todo')
-    # test_user_login('staffer', 'todo')
-    # test_create_task('user1', 'todo', 'New task1_1', 'Tanya Stewart (user1)', 'screen_user1_1.png')
-    # test_create_task('user1', 'todo', 'New task1_2', 'Brittany Wright (user2)', 'screen_user1_2.png')
-    # test_create_task('user2', 'todo', 'New task2_1', 'Tanya Stewart (user1)', 'screen_user2_1.png')
-    # test_create_task('user2', 'todo', 'New task2_2', 'Brittany Wright (user2)', 'screen_user2_2.png')
-    # test_create_task('user1', 'todo', 'New task1_s', 'Matthew Gonzalez (staffer)', 'screen_user1_s.png')
-    # test_create_task('user2', 'todo', 'New task2_s', 'Matthew Gonzalez (staffer)', 'screen_user2_s.png')
-    # test_create_task('user3', 'todo', 'New task3_3', 'Brian Harris (user3)', 'screen_user3_3.png')
-    # test_create_task('user3', 'todo', 'New task3_4', 'Linda Tucker (user4)', 'screen_user3_4.png')
-    # test_create_task('user4', 'todo', 'New task4_3', 'Brian Harris (user3)', 'screen_user4_3.png')
-    # test_create_task('user4', 'todo', 'New task4_4', 'Linda Tucker (user4)', 'screen_user4_4.png')
-    # test_create_task('user3', 'todo', 'New task3_s', 'Matthew Gonzalez (staffer)', 'screen_user3_s.png')
-    # test_create_task('user4', 'todo', 'New task4_s', 'Matthew Gonzalez (staffer)', 'screen_user4_s.png')
-    # test_create_task('staffer', 'todo', 'New tasks_s', 'Adrienne Welch (staffer)', 'screen_users_s.png')
-    # test_create_task('staffer', 'todo', 'New tasks_3', 'Brian Harris (user3)', 'screen_users_3.png')
-    # test_create_task('staffer', 'todo', 'New tasks_4', 'Linda Tucker (user4)', 'screen_users_4.png')
-    # test_create_list('staffer', 'todo', 'Added list Scuba', 'Scuba Divers', 'screen_scuba.png')
-    # test_create_list('staffer', 'todo', 'Added list Basket', 'Basket Weavers', 'screen_basket.png')
-    # test_task_done('staffer', 'todo', 'screen_done.png')
+    test_login_button_in_body_exists()
+    test_login_button_in_header_exists()
+    test_user_login('user1', 'todo')
+    test_user_login('user2', 'todo')
+    test_user_login('user3', 'todo')
+    test_user_login('user4', 'todo')
+    test_user_login('staffer', 'todo')
+    test_create_task('user1', 'todo', 'New task1_1', 'Tanya Stewart (user1)', 'screen_user1_1.png')
+    test_create_task('user1', 'todo', 'New task1_2', 'Brittany Wright (user2)', 'screen_user1_2.png')
+    test_create_task('user2', 'todo', 'New task2_1', 'Tanya Stewart (user1)', 'screen_user2_1.png')
+    test_create_task('user2', 'todo', 'New task2_2', 'Brittany Wright (user2)', 'screen_user2_2.png')
+    test_create_task('user1', 'todo', 'New task1_s', 'Matthew Gonzalez (staffer)', 'screen_user1_s.png')
+    test_create_task('user2', 'todo', 'New task2_s', 'Matthew Gonzalez (staffer)', 'screen_user2_s.png')
+    test_create_task('user3', 'todo', 'New task3_3', 'Brian Harris (user3)', 'screen_user3_3.png')
+    test_create_task('user3', 'todo', 'New task3_4', 'Linda Tucker (user4)', 'screen_user3_4.png')
+    test_create_task('user4', 'todo', 'New task4_3', 'Brian Harris (user3)', 'screen_user4_3.png')
+    test_create_task('user4', 'todo', 'New task4_4', 'Linda Tucker (user4)', 'screen_user4_4.png')
+    test_create_task('user3', 'todo', 'New task3_s', 'Matthew Gonzalez (staffer)', 'screen_user3_s.png')
+    test_create_task('user4', 'todo', 'New task4_s', 'Matthew Gonzalez (staffer)', 'screen_user4_s.png')
+    test_create_task('staffer', 'todo', 'New tasks_s', 'Adrienne Welch (staffer)', 'screen_users_s.png')
+    test_create_task('staffer', 'todo', 'New tasks_3', 'Brian Harris (user3)', 'screen_users_3.png')
+    test_create_task('staffer', 'todo', 'New tasks_4', 'Linda Tucker (user4)', 'screen_users_4.png')
+    test_create_list('staffer', 'todo', 'Added list Scuba', 'Scuba Divers', 'screen_scuba.png')
+    test_create_list('staffer', 'todo', 'Added list Basket', 'Basket Weavers', 'screen_basket.png')
+    test_task_done('staffer', 'todo', 'screen_done.png')
     test_task_mark_done('staffer', 'todo', 'screen_mark_done.png')
 
 
