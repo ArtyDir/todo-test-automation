@@ -1,5 +1,4 @@
-import time
-
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -13,8 +12,6 @@ def test_login_button_in_body_exists():
     # переход к начальной странице из тела сайта
     body_elem = driver.find_element(By.XPATH, '//main//a[@href="/login"]')
     body_elem.click()
-
-    time.sleep(3)
 
     driver.close()
 
@@ -30,6 +27,13 @@ def test_login_button_in_header_exists():
     driver.close()
 
 
+@pytest.mark.parametrize('username, password', [
+    ('user1', 'todo'),
+    ('user2', 'todo'),
+    ('user3', 'todo'),
+    ('user4', 'todo'),
+    ('staffer', 'todo')
+])
 def test_user_login(username, password):
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get('http://django-todo.org/')
