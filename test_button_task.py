@@ -108,9 +108,6 @@ def test_edit_task(username, password, screenshot, assigned):
     assigned_to = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//select[@name="assigned_to"]/option[contains(text(), " ({assigned})")]')))
-
-    assigned_to = driver.find_element(By.XPATH,
-                                      f'//select[@name="assigned_to"]/option[contains(text(), " ({assigned})")]')
     assigned_to.click()
 
     # подтверждение редактирования
