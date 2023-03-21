@@ -1,7 +1,10 @@
 import pytest
+from selenium.webdriver.support import expected_conditions as EC
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -102,10 +105,12 @@ def test_edit_task(username, password, screenshot, assigned):
     button_edit.click()
 
     # назначение задачи пользователю
+    assigned_to = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, f'//select[@name="assigned_to"]/option[contains(text(), " ({assigned})")]')))
+
     assigned_to = driver.find_element(By.XPATH,
                                       f'//select[@name="assigned_to"]/option[contains(text(), " ({assigned})")]')
-    assigned_to_temporary = f'//select[@name="assigned_to"]/option[contains(text(), " ({assigned})")]'
-    print(assigned_to_temporary)
     assigned_to.click()
 
     # подтверждение редактирования
